@@ -1,3 +1,7 @@
 >> snowflake search optimization
 
 Snowflake's search optimization service aims to significantly improve the performance of selective point lookup queries on large tables.
+
+>> task
+
+1. Cross Schema task linking is not possible - task from one schema cannot call task from other Schema.
