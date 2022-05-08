@@ -33,3 +33,9 @@ The command does not require a running warehouse to execute.
 The command returns a maximum of 10K records for the specified object type, as dictated by the access privileges 
 for the role used to execute the command; any records above the 10K limit are not returned, even with a filter applied.
 To view results for which more than 10K records exist, query the corresponding view (if one exists) in the Snowflake Information Schema.
+
+>> Constraints:
+Snowflake supports the following constraint types from the ANSI SQL standard:
+UNIQUE, PRIMARY KEY, FOREIGN KEY, NOT NULL
+
+Snowflake supports defining and maintaining constraints, but does not enforce them, except for NOT NULL constraints, which are always enforced.
