@@ -1,0 +1,35 @@
+>> Cluster Key
+Use the system function, SYSTEM$CLUSTERING_INFORMATION, to calculate clustering details, including clustering depth, for a given table.
+
+Clustering key consists of one or more table columns/expressions, which can be of any data type, except GEOGRAPHY, VARIANT, OBJECT, or ARRAY. 
+A clustering key can contain any of the following:
+Base columns.
+Expressions on base columns.
+Expressions on paths in VARIANT columns.
+
+An existing cluster key is copied when a table is created using clone but not copied when table created using CTAS or like command.
+
+To suspend/resuming Automatic Clustering for a table:
+alter table t1 suspend recluster;
+alter table t1 resume recluster;
+
+Viewing automatic clustering history:
+AUTOMATIC_CLUSTERING_HISTORY
+Snowsight: Admin > Usage
+
+For most tables, Snowflake recommends a maximum of 3 or 4 columns (or expressions) per key. Adding more than 3-4 columns tends to increase costs more than benefits.
+
+If you are defining a multi-column clustering key for a table, the order in which the columns are specified in the CLUSTER BY clause is important. As a general rule, 
+Snowflake recommends ordering the columns from lowest cardinality to highest cardinality.
+When clustering on a text field, the cluster key metadata only tracks the first 6 characters. For string fields that need more characters to get unique values, 
+cluster on the HASH of the column instead of the column itself.
+For example, if all values in the event_type column begin with event_, you should cluster by HASH(event_type)
+
+>> Show Functions:
+Lists all the native (i.e. system-defined/built-in) scalar functions provided by Snowflake, 
+as well as any user-defined functions (UDFs) or external functions that have been created for your account.
+
+The command does not require a running warehouse to execute.
+The command returns a maximum of 10K records for the specified object type, as dictated by the access privileges 
+for the role used to execute the command; any records above the 10K limit are not returned, even with a filter applied.
+To view results for which more than 10K records exist, query the corresponding view (if one exists) in the Snowflake Information Schema.
