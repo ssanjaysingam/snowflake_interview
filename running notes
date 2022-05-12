@@ -39,3 +39,30 @@ Snowflake supports the following constraint types from the ANSI SQL standard:
 UNIQUE, PRIMARY KEY, FOREIGN KEY, NOT NULL
 
 Snowflake supports defining and maintaining constraints, but does not enforce them, except for NOT NULL constraints, which are always enforced.
+
+>> Stages
+To stage files to a table stage, list the files, query them on the stage, or drop them, you must be the 
+table owner (have the role with the OWNERSHIP privilege on the table).
+
+>>INFER_SCHEMA
+Automatically detects the file metadata schema in a set of staged data files that contain semi-structured data and retrieves the column definitions.
+This feature is currently limited to Apache Parquet, Apache Avro, and ORC files.
+
+>> GENERATE_COLUMN_DESCRIPTION
+Generates a list of columns from a set of staged files that contain semi-structured data using the INFER_SCHEMA function output.
+-- Create a file format that sets the file type as Parquet.
+create file format my_parquet_format
+  type = parquet;
+
+-- Query the GENERATE_COLUMN_DESCRIPTION function.
+select generate_column_description(array_agg(object_construct(*)), 'table') as columns
+  from table (
+    infer_schema(
+      location=>'@mystage',
+      file_format=>'my_parquet_format'
+    )
+  );
+  
+>> Loading
+The wizard is only intended for loading small numbers of files of limited size (up to 50 MB).
+For loading larger files or large numbers of files, we recommend using the Snowflake client, SnowSQL
