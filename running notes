@@ -66,3 +66,23 @@ select generate_column_description(array_agg(object_construct(*)), 'table') as c
 >> Loading
 The wizard is only intended for loading small numbers of files of limited size (up to 50 MB).
 For loading larger files or large numbers of files, we recommend using the Snowflake client, SnowSQL
+
+>>Search Optimization Service
+The search optimization service can significantly improve the performance of point lookup queries.
+Search optimization is a table-level property and applies to all columns with supported data types
+A maintenance service that runs in the background is responsible for creating and maintaining the search access path.
+The search optimization service speeds only equality searches.
+
+You must have OWNERSHIP privilege on the table.
+You must have ADD SEARCH OPTIMIZATION privilege on the schema that contains the table.
+
+Use APPROX_COUNT_DISTINCT to get the approximate number of distinct values.
+Data Types Supported By the Search Optimization Service
+
+The search optimization service currently supports equality predicate and IN list predicate searches for the following data types:
+Fixed-point numbers (e.g. INTEGER, NUMERIC).
+DATE, TIME, and TIMESTAMP.
+VARCHAR.
+BINARY.
+
+ALTER TABLE [IF EXISTS] <table_name> ADD/DROP SEARCH OPTIMIZATION;
