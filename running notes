@@ -86,3 +86,28 @@ VARCHAR.
 BINARY.
 
 ALTER TABLE [IF EXISTS] <table_name> ADD/DROP SEARCH OPTIMIZATION;
+
+
+>> Shares:
+
+If you plan to securely share data with data consumers across different regions or cloud platforms, note that currently,
+replicating a primary database is blocked if one or more external tables exist in the database.
+
+A new object created in a database in a share is not automatically available to consumers.
+To make the object available to consumers, you must use the GRANT <privilege> … TO SHARE command to explicitly add the object to the share.
+
+Do not include secure objects that use the CURRENT_USER or CURRENT_ROLE functions in their definition.
+
+Enabling Data Consumers to Create Table Streams on Shared Tables
+In order for data consumers to create streams on shared tables or secure views, you must enable change tracking 
+on the shared tables or the underlying tables for a shared view.
+In addition, the data retention period should be extended for the tables.
+
+If you have a Business Critical account and are sharing data with consumer accounts
+Snowflake supports sharing sensitive data with non-Business Critical accounts (disabled by default), but does not encourage doing so.
+To ensure compliance with HIPAA and HITRUST requirements, Snowflake does not allow HIPAA accounts to share data with non-HIPAA accounts.
+If you are using Tri-Secret Secure data protection, note that Snowflake treats data access from consumer accounts as if the access occurred
+from within your own account.
+
+SHOW GRANTS OF SHARE lists all accounts that have created a database from the share. 
+If no accounts have created a database from the share, the results are empty.
