@@ -111,3 +111,61 @@ from within your own account.
 
 SHOW GRANTS OF SHARE lists all accounts that have created a database from the share. 
 If no accounts have created a database from the share, the results are empty.
+
+--
+Features that rely on Snowflake-managed compute resources appear on your bill as separate line items. 
+Charges for these features are calculated based on total usage of the resources (including cloud service usage) 
+measured in compute-hours credit usage. One compute-hour is comparable to the computing resources utilized when 
+running an X-Small virtual warehouse for an hour.
+
+The credits used by these serverless features are not monitored or controlled by resource monitors; resource monitors 
+only work with the virtual warehouses that you create/manage in your account.
+
+
+--Understanding local and remote disk spilling and how to mitigate the performance impact due to it.
+What is disk spilling? When Snowflake warehouse cannot fit an operation in memory, it starts spilling (storing) data 
+first to the local disk of a warehouse node, and then to remote storage and if need to remote cloud storage as well,
+this means extra IO operations, any query that requires spilling will take longer than a similar query running on 
+similar data that is capable to fit the operations in memory.
+
+Solution:
+The spilling can't always be avoided, especially for large batches of data, but it can be decreased by:
+Reviewing the query for query optimization especially if it is a new query
+Reducing the amount of data processed. For example, by trying to improve partition pruning, or projecting only the columns that are needed in the output.
+Decreasing the number of parallel queries running in the warehouse.
+Trying to split the processing into several steps (for example by replacing the CTEs with temporary tables).
+Using a larger warehouse - this effectively means more memory and more local disk space.
+
+-- File encryption in Snowflake Stage
+If the stage is an internal data files are automatically encrypted by the Snowflake client on the user’s local 
+machine prior to being transmitted to the internal stage, in addition to being encrypted after they are loaded into the stage.
+
+If the stage is an external stage, the user may optionally encrypt the data files using client-side encryption.
+We recommend client-side encryption for data files in external stages; but if the data is not encrypted, 
+Snowflake immediately encrypts the data when it is loaded into a table.
+
+In Snowflake, all data at rest is always encrypted and encrypted with TLS(Transport Layer Security) in transit.
+
+All Snowflake-managed keys are automatically rotated by Snowflake when they are more than 30 days old.
+When active, a key is used to encrypt data and is available for usage by the customer. When retired, 
+the key is used solely to decrypt data and is only available for accessing the data.
+When a key is destroyed, it is not used for either encryption or decryption. Regular key rotation limits the life cycle for the keys to a limited period of time.
+
+--Periodic Rekeying
+Periodic data rekeying completes the life cycle.While key rotation ensures that a key is transferred from its active state to a retired state,
+rekeying ensures that a key is transferred from its retired state to being destroyed.
+If periodic rekeying is enabled, then when the retired encryption key for a table is older than one year, Snowflake automatically creates a new encryption key
+and re-encrypts all data previously protected by the retired key using the new key. The new key is used to decrypt the table data going forward.
+
+Tri-Secret Secure
+Snowflake logo in black (no text) Business Critical Feature
+
+Requires Business Critical Edition (or higher). To inquire about upgrading, please contact Snowflake Support.
+
+--Tri-Secret Secure
+Tri-Secret Secure is the combination of a Snowflake-maintained key and a customer-managed key in the cloud provider platform that hosts your Snowflake account 
+to create a composite master key to protect your Snowflake data. The composite master key acts as an account master key and wraps all of the keys in the hierarchy;
+however, the composite master key never encrypts raw data.
+
+>> Periodic rekeying of encrypted data is avaiable from Enterprise Edition
+>> Configure the idle session timeout for your account or a user through session policies --from Enterprise Edition
