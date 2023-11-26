@@ -1,0 +1,46 @@
+Interview Questions:
+
+1. How would you identify unused tables in Snowflake? 
+
+2. What is the difference between direct_objects_accessed and base_objects_accessed columns in the query history view?
+
+Anwer with explanation:
+
+When it comes to deciding if a table is unused, it’s important to find out how many queries that directly or indirectly access the table.
+
+Access History is a view in the Account Usage schema of the Snowflake Database. It is available for all Snowflake accounts on Enterprise Edition or higher. Access History can be used to look up the Snowflake objects (i.e. tables, views, and columns) accessed by each query, either directly or indirectly. 
+
+There are two columns of interest: direct_objects_accessed and base_objects_accessed
+
+Example: 
+
+create or replace temp_view as (
+ select *
+ from temp_table
+);
+
+
+The query select * from temp_view; directly accesses the "temp_view" object, and indirectly accesses the base "temp_table" table. So, "temp_view" will appear in the direct_objects_accessed column of access_history, whereas "temp_table" will appear in base_objects_accessed. 
+
+When it comes to deciding if a table is unused, it’s important to use base_objects_accessed since this will account for queries that indirectly access a table through a view.
+
+We can determine the exact time a table was last accessed along with the user who ran the query: using "lateral flatten(access_history.base_objects_accessed) as objects_accessed"
+
+Using the table_storage_metrics account usage view the annual storage cost of each table can be calculated.
+
+###############
+
+1. What encryption methods does Snowflake use for data protection?
+Answer: Snowflake employs strong encryption standards. It uses AES-256 encryption for data at rest and TLS (Transport Layer Security) for data in transit.
+
+2. How does Snowflake handle data masking?
+Answer: Snowflake offers dynamic data masking, which allows sensitive data to be masked based on user roles or privileges. This ensures that users only see the data they are authorized to access.
+
+3. Explain the role of Role-Based Access Control (RBAC) in data protection within Snowflake.
+Answer: RBAC in Snowflake provides a granular way to control access to resources. It allows administrators to define roles and assign privileges to users or groups, ensuring that only authorized users can access specific data and perform certain operations.
+
+4. What is Row-Level Security (RLS) and how is it implemented in Snowflake?
+Answer: Row-Level Security (RLS) in Snowflake allows for finer control over data access by filtering rows based on defined conditions. It's implemented using security policies, which are set up to restrict access to specific rows in a table based on user attributes or roles.
+
+5. How does Snowflake ensure data integrity and consistency?
+Answer: Snowflake maintains data integrity and consistency through a combination of features like ACID compliance, automatic clustering, and transaction management. This ensures that data is reliably stored and processed.
