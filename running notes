@@ -169,3 +169,13 @@ however, the composite master key never encrypts raw data.
 
 >> Periodic rekeying of encrypted data is avaiable from Enterprise Edition
 >> Configure the idle session timeout for your account or a user through session policies --from Enterprise Edition
+
+-----------
+Schema detection:
+This is a feature which is enabled by “INFER SCHEMA”, this property automatically determines the file metadata structure and obtains the column definitions. 
+
+Schema evolution:
+This is a table property and when it is set, it guarantees that alterations made to a table's schema won't affect the table's capacity to handle data. 
+--Below is how we can enable this feature:
+ALTER TABLE <table_name> SET enable_schema_evolution=true;    -- Post this command is set, we can also use show tables; command to see which all tables have this feature enabled.
+
