@@ -179,3 +179,23 @@ This is a table property and when it is set, it guarantees that alterations made
 --Below is how we can enable this feature:
 ALTER TABLE <table_name> SET enable_schema_evolution=true;    -- Post this command is set, we can also use show tables; command to see which all tables have this feature enabled.
 
+
+-------------
+# Secured Data Sharing
+
+With Secure Data Sharing, no actual data is copied or transferred between accounts. All sharing uses Snowflake’s services layer and metadata store.
+Shared data does not take up any storage in a consumer account and therefore does not contribute to the consumer’s monthly data storage charges. The only charges to consumers are for the compute resources (i.e. virtual warehouses) used to query the shared data.
+The provider can also share data from multiple databases, as long as these databases belong to the same account.
+On the consumer side, a read-only database is created from the share.
+
+Shares are named Snowflake objects that encapsulate all of the information required to share a database.
+using either or both of the following options:
+Option 1: Grant privileges on objects to a share via a database role.
+Option 2: Grant privileges on objects directly to a share.
+
+
+
+---------------
+#Materialized tables:
+
+ALTER MATERIALIZED VIEW vulnerable_pipes CLUSTER BY (installation_year);
