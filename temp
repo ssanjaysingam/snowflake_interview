@@ -1,0 +1,31 @@
+create or replace procedure sp_with_errhandling_js()
+returns varchar
+language javascript
+as
+$$
+var result = "";
+try {
+var sql1 = snowflake.createStatement({sqlText: 'select * from xyz'}); // this is invalid table name
+sql1.execute();
+}
+catch (err) {
+result = "Failed: Code: " + err.code + "\n state: " + err.state;
+result += '\n Message: " + err.message;
+result += '\nStack Trace:\n" + err.stackTraceTxt;
+}
+return result;
+$$;
+
+create or replace procedure sp_with_errhandling_sql()
+returns varchar
+language sql
+as
+$$
+BEGIN
+select * from xyz;
+EXCEPTION WHEN OTHER THEN 
+return 'ERROR MESSAGE IS :' || :SQLERRM;
+END;
+$$;
+
+INSERT INTO RDM_ENGG_FF_GLB.T_ENGG_PART_AUDT(JOB_ID,EVENT_TYPE,STEP_LEVEL,SOURCE_SYSTEM,TARGET_SYSTEM,LOAD_TYPE,START_TIME,JOB_RUN_DATE) VALUES (:V_JOB_ID,''Windchill_Transpose'',''2.1.3'',''V_RDM_WINDCHILL_CMPR'',''T_RDM_WINDCHILL_CMPR'',:LOAD_TYPE,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP);
