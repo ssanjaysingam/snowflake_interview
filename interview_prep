@@ -1,0 +1,12 @@
+Performance:
+	Reduce auto suspend of warehouse to 60 seconds
+	reduce the virtual warehouse size
+	make sure that the minimum cluster size is one
+	reduce the frequency of the queries or load
+	make sure the tables are properly clustered
+	make use of tangent tables whenever required
+	consolidate warehouse if we have too many unused warehouses to increase the efficiency of the warehouse
+	take care of this columns which we are selecting which will reduce the io operations
+	if there are any complex voice break the complex you into smaller parts
+	query optimization service try to make best use of the catchy facility available in snowflake 
+	View the query profile you to understand bottleneck.
