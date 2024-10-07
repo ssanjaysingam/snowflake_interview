@@ -1,0 +1,37 @@
+Here’s a list of questions asked in my interview at PwC for the role of Data Engineer →
+Hope it helps!
+
+Total there are 3 rounds & the technical interview process consisted of 4 rounds, each targeting a core skill set for data engineering.
+
+📍 ROUND 1: SQL & Data Modeling
+
+ 1. Write a SQL query to find the second highest salary from an employee table.
+ 2. How would you design a data model for a ride-sharing app (drivers, rides, passengers)?
+ 3. Explain the concept of normalization. What are the pros and cons of a fully normalized database?
+ 4. How would you handle data redundancy in your design?
+ 5. Describe the differences between star schema and snowflake schema. In which scenarios would you prefer each?
+ 6. What are common challenges when designing scalable data models?
+
+📍 ROUND 2: Data Warehousing & ETL
+
+ 1. How do you design a data warehouse to handle customer order history?
+ 2. What’s your approach for incremental data extraction from source systems?
+ 3. Explain the ETL process using Apache NiFi or Talend.
+ 4. What are slowly changing dimensions (SCDs)? How do you manage Type 2 SCDs in ETL?
+ 5. How would you handle schema evolution in a data warehouse?
+
+📍 ROUND 3: Big Data Technologies & Cloud Infrastructure
+
+ 1. How would you design a data pipeline to handle petabytes of data?
+ 2. Explain how Apache Spark works under the hood. How would you optimize a Spark job?
+ 3. What are the key differences between Google BigQuery and Snowflake?
+ 4. Describe your experience with Kafka. How would you use it to implement data streaming for near real-time analytics?
+ 5. Explain partitioning and bucketing in Hive, and how they improve performance.
+
+📍 ROUND 4: Cloud Services & Real-World Scenario
+
+ 1. How would you use GCP services (such as BigQuery, Dataflow, and Cloud Storage) to design a data processing pipeline?
+ 2. How do you ensure data security and compliance in a cloud data warehouse?
+ 3. What’s your experience with Google Cloud Composer (Airflow)? How would you orchestrate an ETL workflow?
+ 4. How would you architect a scalable ETL process using GCP Dataflow and Pub/Sub?
+ 5. What’s your approach for monitoring and logging data pipelines in the cloud?
