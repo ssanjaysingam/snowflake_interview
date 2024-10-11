@@ -1,0 +1,15 @@
+Schema Evolution:
+
+- Semi-structured data tends to evolve over time
+- Snowflake supports automatic evolution of table structure to accommodate new data(Adding columns and dropping not null contrains)
+- Schema evolution can be enabled when creating a new table or modifying an existing table
+- Loading data with the ENABLE_SCHEMA_EVOLUTION parameter set to TRUE and using the MATCH_BY_COLUMN_NAME option enables table column evolution.
+-the role used to load the data has the EVOLVE SCHEMA or OWNERSHIP privilege on the table.
+- Schema evolution is limited to certain file types( all other than XML) and loading methods (only copy command)
+- Schema evolution is not supported by tasks
+- Schema evolution is tracked by the SchemaEvolutionRecord column in various views ( INFORMATION_SCHEMA COLUMNS View, ACCOUNT_USAGE COLUMNS View, DESCRIBE TABLE command, and SHOW COLUMNS command), except for the Kafka connector with Snowpipe Streaming.
+- There are limitations on the number of columns that can be added or schemas evolved per COPY operation
+- Manual renaming or modification of columns after schema evolution clears the schema evolution record  
+
+--------------------- ******************------------------------
+
