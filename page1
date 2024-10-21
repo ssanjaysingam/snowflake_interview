@@ -5,3 +5,29 @@ Snowflake's search optimization service aims to significantly improve the perfor
 >> task
 
 1. Cross Schema task linking is not possible - task from one schema cannot call task from other Schema.
+
+-------------
+EY Interview Questions for L1 Round
+
+1. Reverse a string without using predefined functions and str[::-1].
+Given: str1 = "DataEngineering"
+
+
+2. Find the product of list elements:
+List: L1 = [1, 2, 3, 4, 5]
+
+
+3. Generate a list of squares of even numbers from 0 to 20.
+
+
+4. Consider a table named Sales with the following structure:
+
+SalesID EmployeeID SaleAmount SaleDate
+1 101 500 2024-07-01
+2 102 300 2024-07-01
+3 101 700 2024-07-02
+4 103 400 2024-07-02
+5 102 600 2024-07-03
+6 101 800 2024-07-03
+7 103 900 2024-07-04
+8 102 1000 2024-07-04
