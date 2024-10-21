@@ -31,3 +31,34 @@ SalesID EmployeeID SaleAmount SaleDate
 6 101 800 2024-07-03
 7 103 900 2024-07-04
 8 102 1000 2024-07-04
+
+----------SPARK PERFORMANCE TUNING
+9 Performance tuning techniques to optimize your Spark Jobs.
+
+1. Filtering Irrelevant Data as early as possible.
+
+2. Making sure broadcast hash join strategy is used when joining one large and one small table. Tune parameters if required.
+
+3. Make sure Hash Aggregate is used instead of Sort Aggregate when doing aggregation on a column with not too many distinct keys.
+
+4. There might be a problem of partition Skew & you can identify it using spark UI.
+AQE when turned on can help to solve this. Else you have to do Salting (but that's a pain)
+
+5. Change the physical layout of data - consider partitioning your data on a column, if you have filters on that. This will help you to skip many folders & we call it partition pruning.
+
+6. if you are joining 2 large tables and you have to do it repeatedly, then consider bucketing both the tables on the join key. Make sure you have same number of buckets in both the tables. This helps you to avoid shuffling.
+
+7. Try caching/persisting as and when required. This helps you to avoid going back to the disc again & again.
+
+8. Try to tune the number of shuffle partitions. This will control your parallelism after a wide transformation.
+when using AQE this will be taken care of automatically.
+
+9. Try using efficient file formats & compression techniques that will really help. For Apache Spark, Parquet is a very compatible file format & Snappy gives you fast compression. But which file format & compression to use depends on your usecase.
+
+Avoid UDFs when possible: User-defined functions (UDFs) can slow down your Spark jobs because they don't benefit from Catalyst Optimizer optimizations. Instead, use built-in functions in Spark SQL or the DataFrame API, which are highly optimized.
+
+Optimize Shuffles: Shuffles are expensive operations in Spark. Try to minimize shuffle operations by avoiding unnecessary repartitioning, groupByKey operations, or wide transformations. Using reduceByKey instead of groupByKey is also more efficient.
+
+Tuning Executor Memory: Ensure that executor memory and core configurations are set optimally. If executor memory is too high, you risk frequent garbage collections; if too low, jobs might spill to disk. Tuning these parameters is crucial for performance.
+
+Broadcast Joins Beyond Small Tables: Even though broadcast joins are generally recommended for small tables, you can still broadcast larger datasets if you have enough executor memory. This can sometimes give better performance than a shuffle-based join.
