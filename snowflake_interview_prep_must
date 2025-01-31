@@ -1,0 +1,44 @@
+Snowflake has become a game-changer in cloud data warehousing, and understanding its core concepts is essential for landing top Data Engineering roles.
+
+Here’s a curated list of frequently asked interview questions to help you ace your next interview:
+
+1️⃣ General Snowflake Knowledge
+
+✅ What makes Snowflake unique compared to traditional data warehouses?
+✅ Explain Snowflake’s architecture and its key features.
+✅ What is a Virtual Warehouse, and how does it function?
+✅ How does compute and storage separation benefit users?
+✅ What is Time Travel, and how does it assist with data recovery?
+✅ Explain Zero-Copy Cloning and how it optimizes storage usage.
+
+2️⃣ Data Loading & Transformation
+
+✅ How do you efficiently load data into Snowflake?
+✅ What is the COPY command, and when would you use it?
+✅ How does Snowflake handle semi-structured data like JSON and Parquet?
+✅ What are best practices for data transformations in Snowflake?
+
+3️⃣ Performance & Optimization
+
+✅ How do you optimize query performance in Snowflake?
+✅ What is clustering, and how does it impact performance?
+✅ How does Snowflake’s auto-scaling feature work?
+✅ What is query profiling, and how do you troubleshoot slow queries?
+
+4️⃣ Security & Access Control
+
+✅ What are the key security features in Snowflake?
+✅ How do you implement role-based access control effectively?
+✅ How does Snowflake enable secure data sharing between organizations?
+
+5️⃣ Integration & Data Pipelines
+
+✅ How do you integrate Snowflake with tools like Python, Spark, or ETL platforms?
+✅ What’s the process for building a data pipeline in Snowflake?
+✅ How does Snowflake integrate with cloud storage platforms like AWS S3, Azure Blob Storage, and Google Cloud Storage?
+
+6️⃣ Best Practices
+
+✅ What are some best practices for Snowflake data modeling?
+✅ How do you manage and control costs in Snowflake?
+✅ What strategies ensure data consistency and reliability?
