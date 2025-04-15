@@ -44,3 +44,18 @@ Answer: Row-Level Security (RLS) in Snowflake allows for finer control over data
 
 5. How does Snowflake ensure data integrity and consistency?
 Answer: Snowflake maintains data integrity and consistency through a combination of features like ACID compliance, automatic clustering, and transaction management. This ensures that data is reliably stored and processed.
+
+################## things to know before you start discussion on snowflake
+
+1- Account usage vs Information Schema
+2- View vs Materialized view
+3- Internal Stage vs External Stage
+4- Dynamic Table vs Materialized view vs Task & Stream
+5- Transient vs Temporary vs Permanent Tables
+6- Streams vs CHANGES
+7- Scale up vs Scale out
+8- Zero Copy Clone vs CTAs
+9- Clustering vs SOS (Search Optimization Service)
+10- External Functions vs UDF
+11- Data Sharing vs Replication
+12- Time Travel vs Fail Safe
